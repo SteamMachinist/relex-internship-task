@@ -18,6 +18,12 @@
 docker compose up
 ```
 
+## Данные для входа:
+```
+example@gmail.com
+password
+```
+
 ## REST API endpoints
 ### /auth
 
