@@ -12,18 +12,18 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class UserService {
-    private final UserRepository userRepository;
+    private final UserRepository repository;
 
     public User add(User user) {
-        return userRepository.save(user);
+        return repository.save(user);
     }
 
     public User getByEmail(String email) {
-        return userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("No user with email " + email));
+        return repository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("No user with email " + email));
     }
 
     public List<User> getAll() {
-        return userRepository.findAll();
+        return repository.findAll();
     }
 
     public UserDetailsService userDetailsService() {
