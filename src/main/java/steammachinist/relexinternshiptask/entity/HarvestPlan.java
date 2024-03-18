@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Objects;
 
 @Entity
-@Table(name="harvest_entry")
+@Table(name="harvest_plan")
 @Getter
 @Setter
 @ToString
