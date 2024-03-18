@@ -19,11 +19,22 @@ public class HarvestEntry {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private LocalDateTime dateTime;
-    @OneToOne
+    @ManyToOne
     private User user;
     @ManyToOne
     private Product product;
     private double amount;
+
+    public HarvestEntry(User user, Product product, double amount) {
+        this.dateTime = LocalDateTime.now();
+        this.user = user;
+        this.product = product;
+        if (product.isInteger()) {
+            this.amount = (int)amount;
+        } else {
+            this.amount = amount;
+        }
+    }
 
     @Override
     public final boolean equals(Object o) {
