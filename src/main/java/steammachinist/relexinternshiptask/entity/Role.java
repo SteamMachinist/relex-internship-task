@@ -1,6 +1,6 @@
 package steammachinist.relexinternshiptask.entity;
 
 public enum Role {
-    MANAGER,
-    EMPLOYEE
+    ROLE_MANAGER,
+    ROLE_EMPLOYEE
 }
