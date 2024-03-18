@@ -29,4 +29,12 @@ public class UserService {
     public UserDetailsService userDetailsService() {
         return this::getByEmail;
     }
+
+    public void enableUser(String email) {
+        getByEmail(email).setEnabled(true);
+    }
+
+    public void blockUser(String email) {
+        getByEmail(email).setEnabled(false);
+    }
 }

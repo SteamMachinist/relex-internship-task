@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class AddProductRequest {
     private String name;
     private String measurementUnit;
-    private boolean isInteger;
+    private boolean integer;
 }

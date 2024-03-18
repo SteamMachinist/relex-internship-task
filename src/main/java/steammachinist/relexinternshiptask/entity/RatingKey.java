@@ -1,26 +1,14 @@
 package steammachinist.relexinternshiptask.entity;
 
-import jakarta.persistence.*;
-import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Objects;
 
-@Entity
-@Table(name="product")
-@Getter
-@Setter
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
-public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
-    @Column(unique = true)
-    private String name;
-    private String measurementUnit;
-    private boolean integer;
+public class RatingKey implements Serializable {
+    private User user;
+    private LocalDate date;
 
     @Override
     public final boolean equals(Object o) {
@@ -29,12 +17,13 @@ public class Product {
         Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
-        Product product = (Product) o;
-        return getId() != null && Objects.equals(getId(), product.getId());
+        RatingKey ratingKey = (RatingKey) o;
+        return user != null && Objects.equals(user, ratingKey.user)
+                && date != null && Objects.equals(date, ratingKey.date);
     }
 
     @Override
     public final int hashCode() {
-        return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
+        return Objects.hash(user, date);
     }
 }

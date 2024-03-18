@@ -18,3 +18,7 @@ logging:
 token:
   signing:
     key: ${TOKEN_SIGNING_KEY}
+
+initial-account:
+  email: ${INITIAL_ACCOUNT_EMAIL}
+  password: ${INITIAL_ACCOUNT_PASSWORD}
