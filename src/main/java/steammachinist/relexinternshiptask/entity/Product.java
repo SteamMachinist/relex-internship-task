@@ -17,6 +17,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+    @Column(unique = true)
     private String name;
     private String measurementUnit;
     private boolean isInteger;
