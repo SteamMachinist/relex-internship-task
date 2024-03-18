@@ -32,11 +32,20 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     runtimeOnly("org.postgresql:postgresql")
 
+    implementation("org.apache.commons:commons-lang3:3.14.0")
+    implementation("org.springframework.boot:spring-boot-starter-json:3.2.3")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.17.0")
+
     // devtools
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
     implementation("org.mapstruct:mapstruct:1.5.5.Final")
     annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
+
+    // JWT
+    implementation("io.jsonwebtoken:jjwt-api:0.12.3")
+    implementation("io.jsonwebtoken:jjwt-impl:0.12.3")
+    implementation("io.jsonwebtoken:jjwt-jackson:0.12.3")
 
     // testing
     testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -45,4 +54,13 @@ dependencies {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.boot:spring-boot-dependencies:3.2.3")
+        mavenBom("io.jsonwebtoken:jjwt-api:0.12.3")
+        mavenBom("io.jsonwebtoken:jjwt-impl:0.12.3")
+        mavenBom("io.jsonwebtoken:jjwt-jackson:0.12.3")
+    }
 }
