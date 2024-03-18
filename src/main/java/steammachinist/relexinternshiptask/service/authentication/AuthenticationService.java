@@ -3,6 +3,7 @@ package steammachinist.relexinternshiptask.service.authentication;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -45,5 +46,9 @@ public class AuthenticationService {
 
         String jwt = jwtService.generateToken(user);
         return new JwtAuthenticationResponse(jwt);
+    }
+
+    public User getAuthenticatedUser() {
+        return userService.getByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
     }
 }
