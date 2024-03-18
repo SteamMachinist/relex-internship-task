@@ -19,20 +19,20 @@ public class ProductController {
 
     @PostMapping("/add")
     @PreAuthorize("hasRole('ROLE_MANAGER')")
-    public ResponseEntity<ProductDto> addProduct(@RequestBody AddProductRequest request) {
+    public ResponseEntity<Void> addProduct(@RequestBody AddProductRequest request) {
         productService.add(request);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/update")
     @PreAuthorize("hasRole('ROLE_MANAGER')")
-    public ResponseEntity<String> updateProduct(@RequestBody UpdateProductRequest request) {
+    public ResponseEntity<Void> updateProduct(@RequestBody UpdateProductRequest request) {
         productService.update(request);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/get-all")
     public ResponseEntity<List<ProductDto>> getAllProducts() {
-        return ResponseEntity.ok(productService.getAllResponses());
+        return ResponseEntity.ok(productService.getAllDtos());
     }
 }

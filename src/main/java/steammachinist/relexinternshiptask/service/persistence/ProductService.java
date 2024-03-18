@@ -11,26 +11,25 @@ import steammachinist.relexinternshiptask.mapper.ProductMapper;
 import steammachinist.relexinternshiptask.repository.ProductRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class ProductService {
-    private final ProductRepository productRepository;
+    private final ProductRepository repository;
     private final ProductMapper mapper;
 
     private Product add(Product product) {
-        return productRepository.save(product);
+        return repository.save(product);
     }
 
     public ProductDto add(ProductDto product) {
-        return mapper.toProductDto(
-                add(mapper.toProduct(product)));
+        return mapper.toDto(
+                add(mapper.toEntity(product)));
     }
 
     public ProductDto add(AddProductRequest addProductRequest) {
-        return mapper.toProductDto(
-                add(mapper.toProduct(addProductRequest)));
+        return mapper.toDto(
+                add(mapper.toEntity(addProductRequest)));
     }
 
     public Product update(Product product) {
@@ -42,24 +41,26 @@ public class ProductService {
     }
 
     public ProductDto update(UpdateProductRequest updateProductRequest) {
-        ProductDto productDto = getProductByName(updateProductRequest.getName())
-                .orElseThrow(() -> new EntityNotFoundException("No product with name " + updateProductRequest.getName()));
+        ProductDto productDto = getProductByNameDto(updateProductRequest.getName());
         productDto.setMeasurementUnit(updateProductRequest.getMeasurementUnit());
         productDto.setInteger(updateProductRequest.isInteger());
         return update(productDto);
     }
 
     public List<Product> getAll() {
-        return productRepository.findAll();
+        return repository.findAll();
     }
 
-    public List<ProductDto> getAllResponses() {
-        return mapper.toProductDtos(
+    public List<ProductDto> getAllDtos() {
+        return mapper.toDtos(
                 getAll());
     }
 
-    public Optional<ProductDto> getProductByName(String name) {
-       return productRepository.findProductByName(name)
-               .map(mapper::toProductDto);
+    public Product getProductByName(String name) {
+        return repository.findProductByName(name).orElseThrow(() -> new EntityNotFoundException("No product with name " + name));
+    }
+
+    public ProductDto getProductByNameDto(String name) {
+        return mapper.toDto(getProductByName(name));
     }
 }
